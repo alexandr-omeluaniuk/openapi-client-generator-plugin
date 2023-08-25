@@ -7,7 +7,6 @@ import org.gradle.kotlin.dsl.property
 import java.io.File
 import java.net.URL
 import java.nio.file.Files
-import java.nio.file.Paths
 
 open class LoadSpecTask : DefaultTask() {
 
@@ -17,13 +16,17 @@ open class LoadSpecTask : DefaultTask() {
     @TaskAction
     fun doWork() {
         val url = specUrl.get()
-        logger.info("Upload spec from URL [$url]")
-        val resourcesDir = File(project.projectDir.path + "/src/main/resources")
-        if (!resourcesDir.exists()) {
-            resourcesDir.mkdirs()
+        try {
+            logger.info("Upload spec from URL [$url]")
+            val resourcesDir = File(project.projectDir.path + "/src/main/resources")
+            if (!resourcesDir.exists()) {
+                resourcesDir.mkdirs()
+            }
+            val specFile = File(resourcesDir.path + "/" + SPEC_FILE_NAME)
+            downloadFile(URL(url), specFile)
+        } catch (e: Exception) {
+            logger.warn("Spec file [$url] can not be downloaded", e)
         }
-        val specFile = File(resourcesDir.path + "/" + SPEC_FILE_NAME)
-        downloadFile(URL(url), specFile)
     }
 
     private fun downloadFile(url: URL, file: File) {
@@ -31,6 +34,6 @@ open class LoadSpecTask : DefaultTask() {
     }
 
     companion object {
-        val SPEC_FILE_NAME = "spec.json"
+        const val SPEC_FILE_NAME = "spec.json"
     }
 }
