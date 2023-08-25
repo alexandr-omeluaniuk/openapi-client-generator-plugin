@@ -1,6 +1,6 @@
 plugins {
     id("ss.openapi")
-
+    `java-library`
 }
 
 openApiGeneratorSettings {
