@@ -23,7 +23,7 @@ class OpenApiClientGeneratorPlugin : Plugin<Project> {
                     group = pluginGroup
                     description = "Load spec and save it on success as resource"
 
-                    inputSpec.set(settings.specUrl)
+                    specUrl.set(settings.specUrl)
                 }
                 register(
                     "generateCode",
