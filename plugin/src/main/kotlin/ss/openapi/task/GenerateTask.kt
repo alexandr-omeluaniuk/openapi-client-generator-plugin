@@ -30,6 +30,14 @@ open class GenerateTask : DefaultTask() {
         configurator.setPackageName(basePackage)
         configurator.setApiPackage("$basePackage.api")
         configurator.setModelPackage("$basePackage.model")
+        configurator.setAdditionalProperties(
+            mapOf(
+                "dateLibrary" to "java8",
+                "library" to "native",
+                "openApiNullable" to "false",
+                "useJakartaEe" to "true"
+            )
+        )
         DefaultGenerator(false).opts(
             configurator.toClientOptInput()
         ).generate()

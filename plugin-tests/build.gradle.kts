@@ -1,6 +1,7 @@
 plugins {
     id("ss.openapi")
     `java-library`
+    kotlin("jvm") version "1.8.20"
 }
 
 openApiGeneratorSettings {
