@@ -4,6 +4,8 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.property
+import ss.openapi.SPEC_FILE_DIR
+import ss.openapi.SPEC_FILE_NAME
 import java.io.File
 import java.net.URL
 import java.nio.file.Files
@@ -18,7 +20,7 @@ open class LoadSpecTask : DefaultTask() {
         val url = specUrl.get()
         try {
             logger.info("Upload spec from URL [$url]")
-            val resourcesDir = File(project.projectDir.path + "/src/main/resources")
+            val resourcesDir = File(project.projectDir.path + SPEC_FILE_DIR)
             if (!resourcesDir.exists()) {
                 resourcesDir.mkdirs()
             }
@@ -31,9 +33,5 @@ open class LoadSpecTask : DefaultTask() {
 
     private fun downloadFile(url: URL, file: File) {
         url.openStream().use { Files.copy(it, file.toPath()) }
-    }
-
-    companion object {
-        const val SPEC_FILE_NAME = "spec.json"
     }
 }

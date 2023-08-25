@@ -31,6 +31,7 @@ class OpenApiClientGeneratorPlugin : Plugin<Project> {
                 ).configure {
                     group = pluginGroup
                     description = "Generate code (api, models) using openapi spec"
+                    dependsOn(tasks.getByName("loadSpec"))
                 }
             }
         }
@@ -40,3 +41,6 @@ class OpenApiClientGeneratorPlugin : Plugin<Project> {
         const val pluginGroup = "openapi"
     }
 }
+
+const val SPEC_FILE_NAME = "spec.json"
+const val SPEC_FILE_DIR = "/src/main/resources"
