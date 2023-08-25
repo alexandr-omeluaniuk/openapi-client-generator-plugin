@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import ss.openapi.extension.GeneratorSettingsExtension
 import ss.openapi.task.GenerateTask
+import ss.openapi.task.LoadSpecTask
 
 class OpenApiClientGeneratorPlugin : Plugin<Project> {
 
@@ -15,6 +16,15 @@ class OpenApiClientGeneratorPlugin : Plugin<Project> {
                 project
             )
             tasks.apply {
+                register(
+                    "loadSpec",
+                    LoadSpecTask::class.java
+                ).configure {
+                    group = pluginGroup
+                    description = "Load spec and save it on success as resource"
+
+                    inputSpec.set(settings.specUrl)
+                }
                 register(
                     "generateCode",
                     GenerateTask::class.java
