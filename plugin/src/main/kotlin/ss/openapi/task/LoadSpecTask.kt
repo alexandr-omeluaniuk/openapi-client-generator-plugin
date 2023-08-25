@@ -4,7 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.property
 
-class LoadSpecTask : DefaultTask() {
+open class LoadSpecTask : DefaultTask() {
 
     val inputSpec = project.objects.property<String>()
 
