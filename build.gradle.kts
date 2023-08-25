@@ -1,15 +1,19 @@
 plugins {
+    `kotlin-dsl`
     kotlin("jvm") version "1.9.0"
+    id("java-gradle-plugin")
 }
 
 group = "ss.openapi"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation("org.openapitools:openapi-generator:7.0.0")
+
     testImplementation(kotlin("test"))
 }
 
@@ -19,4 +23,13 @@ tasks.test {
 
 kotlin {
     jvmToolchain(17)
+}
+
+gradlePlugin {
+    plugins {
+        create("openApiClientGenerator") {
+            id = "ss.openapi"
+            implementationClass = "ss.openapi.OpenApiClientGeneratorPlugin"
+        }
+    }
 }
