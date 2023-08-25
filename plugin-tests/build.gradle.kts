@@ -5,4 +5,5 @@ plugins {
 
 openApiGeneratorSettings {
     specUrl.set("https://fakerestapi.azurewebsites.net/swagger/v1/swagger.json")
+    clientName.set("fake")
 }

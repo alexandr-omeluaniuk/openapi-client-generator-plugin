@@ -32,6 +32,8 @@ class OpenApiClientGeneratorPlugin : Plugin<Project> {
                     group = pluginGroup
                     description = "Generate code (api, models) using openapi spec"
                     dependsOn(tasks.getByName("loadSpec"))
+
+                    clientName.set(settings.clientName)
                 }
             }
         }

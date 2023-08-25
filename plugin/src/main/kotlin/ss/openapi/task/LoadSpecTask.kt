@@ -9,6 +9,7 @@ import ss.openapi.SPEC_FILE_NAME
 import java.io.File
 import java.net.URL
 import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 open class LoadSpecTask : DefaultTask() {
 
@@ -32,6 +33,6 @@ open class LoadSpecTask : DefaultTask() {
     }
 
     private fun downloadFile(url: URL, file: File) {
-        url.openStream().use { Files.copy(it, file.toPath()) }
+        url.openStream().use { Files.copy(it, file.toPath(), StandardCopyOption.REPLACE_EXISTING) }
     }
 }
